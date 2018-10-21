@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { User } from "./";
 
 const postSchema = new mongoose.Schema(
   {
@@ -16,29 +15,12 @@ const postSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
-    },
-    commentIds: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Comment"
-      }
-    ]
+    }
   },
   {
     timestamps: true
   }
 );
-
-postSchema.pre("remove", async function(next) {
-  try {
-    const user = await User.findById(this.userId);
-    user.postIds.remove(this.id);
-    await user.save();
-    return next();
-  } catch (err) {
-    return next(err);
-  }
-});
 
 const Post = mongoose.model("Post", postSchema);
 export default Post;

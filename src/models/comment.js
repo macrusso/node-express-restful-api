@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { User, Post } from "./";
 
 const commentSchema = new mongoose.Schema(
   {
@@ -21,20 +20,6 @@ const commentSchema = new mongoose.Schema(
     timestamps: true
   }
 );
-
-commentSchema.pre("remove", async function(next) {
-  try {
-    const user = await User.findById(this.userId);
-    user.commentIds.remove(this.id);
-    await user.save();
-    const post = await Post.findById(this.postId);
-    post.commentIds.remove(this.id);
-    await post.save();
-    return next();
-  } catch (err) {
-    return next(err);
-  }
-});
 
 const Comment = mongoose.model("Comment", commentSchema);
 export default Comment;
