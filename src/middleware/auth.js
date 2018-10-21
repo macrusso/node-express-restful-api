@@ -6,8 +6,8 @@ dotenv.load();
 export const loginRequired = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
-    jwt.verify(token, process.eventNames.SECRET_KEY, (err, decoded) => {
-      if (decoded) {
+    jwt.verify(token, process.env.SECRET_KEY, err => {
+      if (!err) {
         return next();
       } else {
         return next({

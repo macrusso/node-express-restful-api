@@ -5,7 +5,7 @@ export const createPost = async (req, res, next) => {
     const post = await db.Post.create({
       title: req.body.title,
       body: req.body.body,
-      user: req.body.userId
+      userId: req.body.userId
     });
     const foundPost = await db.Post.findById(post._id).populate("user", {
       name: true,

@@ -6,14 +6,13 @@ export const login = async (req, res, next) => {
     const user = await db.User.findOne({
       email: req.body.email
     });
-    const { id, name, profileImageUrl } = user;
+    const { id, name, email, profileImageUrl } = user;
     const isMatch = await user.comparePass(req.body.password);
     if (isMatch) {
       const token = jwt.sign(
         {
           id,
-          name,
-          profileImageUrl
+          name
         },
         process.env.SECRET_KEY,
         {
@@ -23,6 +22,7 @@ export const login = async (req, res, next) => {
       return res.status(200).json({
         id,
         name,
+        email,
         profileImageUrl,
         token
       });
@@ -43,12 +43,11 @@ export const login = async (req, res, next) => {
 export const register = async (req, res, next) => {
   try {
     const user = await db.User.create(req.body);
-    const { id, name, profileImageUrl } = user;
+    const { id, name, email, profileImageUrl } = user;
     const token = jwt.sign(
       {
         id,
-        name,
-        profileImageUrl
+        name
       },
       process.env.SECRET_KEY,
       {
@@ -58,6 +57,7 @@ export const register = async (req, res, next) => {
     return res.status(200).json({
       id,
       name,
+      email,
       profileImageUrl,
       token
     });
