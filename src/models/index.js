@@ -1,10 +1,14 @@
 import mongoose from "mongoose";
+import User from "./user";
+
 mongoose.set("debug", true);
 mongoose.Promise = Promise;
 mongoose.connect(
-  "mongodb://localhost/api/v1",
+  "mongodb://localhost/api",
   {
     keepAlive: true,
-    useMongoClient: true
+    useNewUrlParser: true
   }
 );
+
+export { User };
