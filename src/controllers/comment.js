@@ -7,12 +7,6 @@ export const createComment = async (req, res, next) => {
       userId: req.body.userId,
       postId: req.body.postId
     });
-    const foundUser = await db.User.findById(req.body.userId);
-    foundUser.commentIds.push(post._id);
-    await foundUser.save();
-    const foundPost = await db.Post.findById(req.body.postId);
-    foundPost.commentIds.push(post._id);
-    await foundPost.save();
     const foundComment = await db.Comment.findById(post._id).populate("user", {
       name: true,
       profileImageUrl: true

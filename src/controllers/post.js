@@ -7,9 +7,6 @@ export const createPost = async (req, res, next) => {
       body: req.body.body,
       user: req.body.userId
     });
-    const foundUser = await db.User.findById(req.body.userId);
-    foundUser.postIds.push(post._id);
-    await foundUser.save();
     const foundPost = await db.Post.findById(post._id).populate("user", {
       name: true,
       profileImageUrl: true
