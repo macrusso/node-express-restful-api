@@ -13,7 +13,8 @@ export const login = async (req, res, next) => {
       const token = jwt.sign(
         {
           id,
-          name
+          name,
+          profileImageUrl
         },
         process.env.SECRET_KEY
       );
@@ -29,7 +30,7 @@ export const login = async (req, res, next) => {
         message: "Invalid Email and/or Password"
       });
     }
-  } catch (error) {
+  } catch (err) {
     return next({
       status: 400,
       message: "Invalid Email and/or Password"
