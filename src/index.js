@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import { errorHandler } from "./controllers/error";
 import { authRoutes, postRoutes, commentRoutes, userRoutes } from "./routes";
+import { loginRequired } from "./middleware/auth";
 
 dotenv.config();
 const app = express();
@@ -13,9 +14,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/api/auth", authRoutes);
-app.use("/api/posts", postRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/comments", commentRoutes);
+app.use("/api/posts", loginRequired, postRoutes);
+app.use("/api/users", loginRequired, userRoutes);
+app.use("/api/comments", loginRequired, commentRoutes);
 
 app.use((req, res, next) => {
   let err = new Error("Not Found");

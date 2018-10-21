@@ -19,7 +19,7 @@ export const createComment = async (req, res, next) => {
 
 export const getComments = async (req, res, next) => {
   try {
-    const comments = await db.Comment.find();
+    const comments = await db.Comment.find().sort({ createdAt: "desc" });
     return res.status(200).json(comments);
   } catch (err) {
     return next(err);

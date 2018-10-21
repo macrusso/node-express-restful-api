@@ -6,7 +6,6 @@ export const login = async (req, res, next) => {
     const user = await db.User.findOne({
       email: req.body.email
     });
-    console.log(user);
     const { id, name, profileImageUrl } = user;
     const isMatch = await user.comparePass(req.body.password);
     if (isMatch) {
@@ -16,7 +15,10 @@ export const login = async (req, res, next) => {
           name,
           profileImageUrl
         },
-        process.env.SECRET_KEY
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "1h"
+        }
       );
       return res.status(200).json({
         id,
@@ -48,7 +50,10 @@ export const register = async (req, res, next) => {
         name,
         profileImageUrl
       },
-      process.env.SECRET_KEY
+      process.env.SECRET_KEY,
+      {
+        expiresIn: "1h"
+      }
     );
     return res.status(200).json({
       id,

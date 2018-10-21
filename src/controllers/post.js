@@ -19,7 +19,7 @@ export const createPost = async (req, res, next) => {
 
 export const getPosts = async (req, res, next) => {
   try {
-    const posts = await db.Post.find();
+    const posts = await db.Post.find().sort({ createdAt: "desc" });
     return res.status(200).json(posts);
   } catch (err) {
     return next(err);
