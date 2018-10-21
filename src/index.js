@@ -2,8 +2,8 @@ import dotenv from "dotenv";
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { errorHandler } from "./handlers/error";
-import { authRoutes, postRoutes } from "./routes";
+import { errorHandler } from "./controllers/error";
+import { authRoutes, postRoutes, commentRoutes } from "./routes";
 
 dotenv.config();
 const app = express();
@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes);
 
 app.use((req, res, next) => {
   let err = new Error("Not Found");

@@ -16,7 +16,13 @@ const postSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
-    }
+    },
+    commentIds: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment"
+      }
+    ]
   },
   {
     timestamps: true
@@ -25,8 +31,8 @@ const postSchema = new mongoose.Schema(
 
 postSchema.pre("remove", async function(next) {
   try {
-    const user = await User.findById(this.user);
-    user.posts.remove(this.id);
+    const user = await User.findById(this.userId);
+    user.postIds.remove(this.id);
     await user.save();
     return next();
   } catch (err) {

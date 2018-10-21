@@ -1,5 +1,5 @@
 import express from "express";
-import { createPost, getPosts, deletePost, updatePost } from "../handlers/post";
+import { createPost, getPosts, deletePost, updatePost } from "../controllers/post";
 
 const router = express.Router({ mergeParams: true });
 

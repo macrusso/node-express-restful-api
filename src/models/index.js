@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import User from "./user";
 import Post from "./post";
+import Comment from "./comment";
 
 mongoose.set("debug", true);
 mongoose.Promise = Promise;
@@ -12,4 +13,4 @@ mongoose.connect(
   }
 );
 
-export { User, Post };
+export { User, Post, Comment };

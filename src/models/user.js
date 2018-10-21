@@ -19,10 +19,16 @@ const userSchema = new mongoose.Schema({
   profileImageUrl: {
     type: String
   },
-  posts: [
+  postIds: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post"
+    }
+  ],
+  commentIds: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment"
     }
   ]
 });
