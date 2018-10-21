@@ -5,6 +5,7 @@
 - node
 - express
 - mongo db
+- babel
 
 ### Testing (TODO)
 
