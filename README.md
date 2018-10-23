@@ -1,5 +1,7 @@
 # Node RESTful API
 
+[![Build Status](https://travis-ci.com/macrusso/node-express-restful-api.svg?branch=master)](https://travis-ci.com/macrusso/node-express-restful-api)
+
 ### Basics
 
 - node
