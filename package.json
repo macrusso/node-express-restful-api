@@ -8,7 +8,7 @@
     "prestart": "npm run -s build",
     "start": "NODE_ENV=production PORT=8080 node dist/index.js",
     "dev": "NODE_ENV=development PORT=8080 nodemon -w ./src --exec \"babel-node ./src\"",
-    "test": "NODE_ENV=test PORT=8080 mocha --exit ./src/tests/*.js"
+    "test": "NODE_ENV=test PORT=8080 mocha --require babel-register --exit ./src/tests --exec \"babel-node ./src/tests\""
   },
   "keywords": [],
   "author": "Mac Rusek",
@@ -30,7 +30,9 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015-node": "^6.1.1",
     "babel-preset-es2017": "^6.24.1",
+    "babel-register": "^6.26.0",
     "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.17.5",
     "rimraf": "^2.6.2"
