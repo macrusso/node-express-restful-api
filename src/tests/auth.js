@@ -4,7 +4,7 @@ import chai from "chai";
 import app from "../index";
 
 chai.should();
-chai.use(chaiHttp);
+let should = chai.use(chaiHttp);
 
 export let token;
 

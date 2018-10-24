@@ -8,7 +8,7 @@
     "prestart": "npm run -s build",
     "start": "NODE_ENV=production PORT=8080 node dist/index.js",
     "dev": "NODE_ENV=development PORT=8080 nodemon -w ./src --exec \"babel-node ./src\"",
-    "test": "NODE_ENV=test PORT=8080 mocha --timeout 10000 --require babel-register --exit ./src/tests --exec \"babel-node ./src/tests\""
+    "test": "NODE_ENV=test PORT=8080 mocha --require babel-register --exit ./src/tests --exec \"babel-node ./src/tests\""
   },
   "keywords": [],
   "author": "Mac Rusek",
