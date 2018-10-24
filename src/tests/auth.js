@@ -30,7 +30,7 @@ describe("Auth", () => {
   });
 
   describe("/POST register user - missing data", () => {
-    it("it should POST new user", done => {
+    it("it should fail to POST new user", done => {
       const newUser = {
         name: "testName"
       };
@@ -53,7 +53,7 @@ describe("Auth", () => {
   });
 
   describe("/POST register user - existing name", () => {
-    it("it should POST new user", done => {
+    it("it should fail to POST new user", done => {
       const newUser = {
         name: "testName",
         password: "password",
@@ -96,7 +96,7 @@ describe("Auth", () => {
   });
 
   describe("/POST login user - wrong credentials", () => {
-    it("it should POST login user", done => {
+    it("it should fail to POST login user", done => {
       const user = {
         password: "password",
         email: "testtest@test.com"
