@@ -2,20 +2,32 @@ import mongoose from "mongoose";
 import chaiHttp from "chai-http";
 import chai from "chai";
 import app from "../index";
+import { User, Post } from "../models";
 
 chai.should();
 chai.use(chaiHttp);
 
-let token;
-let userId;
+export const testUser = new User({
+  name: "test user",
+  password: "password",
+  email: "test_user@test.com"
+}).save();
+
+export const testPost = new Post({
+  title: "test post",
+  body: "awesome new test post",
+  userId: testUser._id
+}).save();
+
+export let token;
 
 describe("Auth", () => {
   describe("/POST register user", () => {
     it("it should POST new user", done => {
       const newUser = {
-        name: "testName",
+        name: "new name",
         password: "password",
-        email: "test@test.com"
+        email: "test_new@test.com"
       };
       chai
         .request(app)
@@ -33,7 +45,7 @@ describe("Auth", () => {
   describe("/POST register user - missing data", () => {
     it("it should fail to POST new user", done => {
       const newUser = {
-        name: "testName"
+        name: "new name"
       };
       chai
         .request(app)
@@ -56,9 +68,9 @@ describe("Auth", () => {
   describe("/POST register user - existing name", () => {
     it("it should fail to POST new user", done => {
       const newUser = {
-        name: "testName",
+        name: "new name",
         password: "password",
-        email: "test@test.com"
+        email: "test_new@test.com"
       };
       chai
         .request(app)
@@ -80,7 +92,7 @@ describe("Auth", () => {
     it("it should POST login user", done => {
       const user = {
         password: "password",
-        email: "test@test.com"
+        email: "test_new@test.com"
       };
       chai
         .request(app)
@@ -91,7 +103,6 @@ describe("Auth", () => {
           res.body.should.be.a("object");
           res.body.should.have.property("token");
           token = res.body.token;
-          userId = res.body.id;
           done();
         });
     });
@@ -119,5 +130,3 @@ describe("Auth", () => {
     });
   });
 });
-
-export { userId, token };

@@ -2,8 +2,7 @@ import mongoose from "mongoose";
 import chaiHttp from "chai-http";
 import chai from "chai";
 import app from "../index";
-import { token, userId } from "./auth";
-import { Post } from "../models";
+import { token, testUser } from "./auth";
 
 chai.should();
 chai.use(chaiHttp);
@@ -47,7 +46,7 @@ describe("Post", () => {
       const newPost = {
         title: "test post",
         body: "awesome new test post",
-        userId: userId
+        userId: testUser._id
       };
       chai
         .request(app)
@@ -69,7 +68,7 @@ describe("Post", () => {
       const newPost = {
         title: "test post",
         body: "awesome new test post",
-        userId: userId
+        userId: testUser._id
       };
       chai
         .request(app)
@@ -92,7 +91,7 @@ describe("Post", () => {
       const updatedPost = {
         title: "test post",
         body: "awesome new test post - updated",
-        userId: userId
+        userId: testUser._id
       };
       chai
         .request(app)
@@ -113,7 +112,7 @@ describe("Post", () => {
       const updatedPost = {
         title: "test post",
         body: "awesome new test post - updated",
-        userId: userId
+        userId: testUser._id
       };
       chai
         .request(app)
@@ -163,5 +162,3 @@ describe("Post", () => {
     });
   });
 });
-
-export { postId };
