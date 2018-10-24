@@ -4,7 +4,10 @@ import chai from "chai";
 import app from "../index";
 
 chai.should();
-let should = chai.use(chaiHttp);
+chai.use(chaiHttp);
+
+let token;
+let userId;
 
 describe("Auth", () => {
   describe("/POST register user", () => {
@@ -87,6 +90,8 @@ describe("Auth", () => {
           res.should.have.status(200);
           res.body.should.be.a("object");
           res.body.should.have.property("token");
+          token = res.body.token;
+          userId = res.body.id;
           done();
         });
     });
@@ -114,3 +119,5 @@ describe("Auth", () => {
     });
   });
 });
+
+export { userId, token };
