@@ -3,8 +3,10 @@ import chaiHttp from "chai-http";
 import chai from "chai";
 import app from "../index";
 
-let should = chai.should();
+chai.should();
 chai.use(chaiHttp);
+
+export let token;
 
 describe("Auth", () => {
   describe("/POST register user", () => {
@@ -87,6 +89,7 @@ describe("Auth", () => {
           res.should.have.status(200);
           res.body.should.be.a("object");
           res.body.should.have.property("token");
+          token = res.body.token;
           done();
         });
     });
