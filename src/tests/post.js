@@ -107,8 +107,8 @@ describe("Post", () => {
     });
   });
 
-  describe("/PATCH update post", () => {
-    it("it should fail to PATCH update post - no token", done => {
+  describe("/PATCH update post - no token", () => {
+    it("it should fail to PATCH update post", done => {
       const updatedPost = {
         title: "test post",
         body: "awesome new test post - updated",
