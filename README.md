@@ -9,7 +9,7 @@
 - mongo db
 - babel
 
-### Testing (TODO)
+### Testing
 
 - mocha
 - chai
