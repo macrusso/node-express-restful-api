@@ -1,25 +1,25 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const commentSchema = new mongoose.Schema(
   {
     body: {
       type: String,
       required: true,
-      maxLength: 255
+      maxLength: 255,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: 'User',
     },
     postId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Post"
-    }
+      ref: 'Post',
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
-const Comment = mongoose.model("Comment", commentSchema);
+const Comment = mongoose.model('Comment', commentSchema);
 export default Comment;

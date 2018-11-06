@@ -1,4 +1,4 @@
-import * as db from "../models";
+import * as db from '../models';
 
 export const getUsers = async (req, res, next) => {
   try {

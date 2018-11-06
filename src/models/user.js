@@ -1,30 +1,30 @@
-require("babel-polyfill");
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+require('babel-polyfill');
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   name: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   profileImageUrl: {
-    type: String
-  }
+    type: String,
+  },
 });
 
-userSchema.pre("save", async function(next) {
+userSchema.pre('save', async function(next) {
   try {
-    if (!this.isModified("password")) {
+    if (!this.isModified('password')) {
       return next();
     }
     const hashedPass = await bcrypt.hash(this.password, 10);
@@ -44,5 +44,5 @@ userSchema.methods.comparePass = async function(candidatePass, next) {
   }
 };
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 export default User;

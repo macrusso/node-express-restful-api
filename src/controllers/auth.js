@@ -1,10 +1,10 @@
-import * as db from "../models";
-import jwt from "jsonwebtoken";
+import * as db from '../models';
+import jwt from 'jsonwebtoken';
 
 export const login = async (req, res, next) => {
   try {
     const user = await db.User.findOne({
-      email: req.body.email
+      email: req.body.email,
     });
     const { id, name, email, profileImageUrl } = user;
     const isMatch = await user.comparePass(req.body.password);
@@ -12,11 +12,11 @@ export const login = async (req, res, next) => {
       const token = jwt.sign(
         {
           id,
-          name
+          name,
         },
         process.env.SECRET_KEY,
         {
-          expiresIn: "1h"
+          expiresIn: '1h',
         }
       );
       return res.status(200).json({
@@ -24,18 +24,18 @@ export const login = async (req, res, next) => {
         name,
         email,
         profileImageUrl,
-        token
+        token,
       });
     } else {
       return next({
         status: 400,
-        message: "Invalid Email and/or Password"
+        message: 'Invalid Email and/or Password',
       });
     }
   } catch (err) {
     return next({
       status: 400,
-      message: "Invalid Email and/or Password"
+      message: 'Invalid Email and/or Password',
     });
   }
 };
@@ -47,11 +47,11 @@ export const register = async (req, res, next) => {
     const token = jwt.sign(
       {
         id,
-        name
+        name,
       },
       process.env.SECRET_KEY,
       {
-        expiresIn: "1h"
+        expiresIn: '1h',
       }
     );
     return res.status(200).json({
@@ -59,15 +59,15 @@ export const register = async (req, res, next) => {
       name,
       email,
       profileImageUrl,
-      token
+      token,
     });
   } catch (err) {
     if (err.code === 11000) {
-      err.message = "Sorry, that name and/or email is taken";
+      err.message = 'Sorry, that name and/or email is taken';
     }
     return next({
       status: 400,
-      message: err.message
+      message: err.message,
     });
   }
 };

@@ -1,16 +1,16 @@
-import mongoose from "mongoose";
-import User from "./user";
-import Post from "./post";
-import Comment from "./comment";
+import mongoose from 'mongoose';
+import User from './user';
+import Post from './post';
+import Comment from './comment';
 
 mongoose.Promise = Promise;
 
-if (process.env.NODE_ENV === "test") {
+if (process.env.NODE_ENV === 'test') {
   mongoose.connect(
-    "mongodb://localhost:27017/test",
+    'mongodb://localhost:27017/test',
     {
       keepAlive: true,
-      useNewUrlParser: true
+      useNewUrlParser: true,
     },
     () => {
       mongoose.connection.db.dropDatabase();
@@ -18,10 +18,10 @@ if (process.env.NODE_ENV === "test") {
   );
 } else {
   mongoose.connect(
-    "mongodb://localhost:27017/api",
+    'mongodb://localhost:27017/api',
     {
       keepAlive: true,
-      useNewUrlParser: true
+      useNewUrlParser: true,
     }
   );
 }
