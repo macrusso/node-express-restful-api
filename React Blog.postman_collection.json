@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"test2@gmail.com\",\n\t\"name\":\"test2\",\n\t\"password\": \"password\",\n\t\"profileImageUrl\": \"string\"\n}"
+							"raw": "{\n\t\"email\": \"test@gmail.com\",\n\t\"name\":\"test\",\n\t\"password\": \"password\",\n\t\"profileImageUrl\": \"string\"\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/api/auth/register",
@@ -53,7 +53,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"qazwsx\",\n\t\"password\": \"qazwsx\"\n}"
+							"raw": "{\n\t\"email\": \"test@gmail.com\",\n\t\"password\": \"password\"\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/api/auth/login",
@@ -94,6 +94,66 @@
 								"api",
 								"users",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"updated name\",\n\t\"profileImageUrl\": \"http://pic-page.com\"\n\t\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/users/{{user_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/users/{{user_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
 							]
 						}
 					},
@@ -154,7 +214,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\":\"dfdfdfdf\",\n\t\"body\": \"dsfdfdfdfd\",\n\t\"userId\":\"5bcbd5144fb5e9eee9cdc5d9\"\n}"
+							"raw": "{\n\t\"title\": \"dfdfdfdf\",\n\t\"body\": \"dsfdfdfdfd\",\n\t\"userId\": {{user_id}}\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/api/posts/",
@@ -185,10 +245,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\":\"12\",\n\t\"body\": \"12\",\n\t\"userId\":\"5bcbd5144fb5e9eee9cdc5d9\"\n}"
+							"raw": "{\n\t\"title\": \"12\",\n\t\"body\": \"12\",\n\t\"userId\": {{user_id}}\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/api/posts/5bcbf89796d864f7a7d73c50",
+							"raw": "localhost:8080/api/posts/{{post_id}}",
 							"host": [
 								"localhost"
 							],
@@ -196,7 +256,7 @@
 							"path": [
 								"api",
 								"posts",
-								"5bcbf89796d864f7a7d73c50"
+								"{{post_id}}"
 							]
 						}
 					},
@@ -217,7 +277,7 @@
 						],
 						"body": {},
 						"url": {
-							"raw": "localhost:8080/api/posts/5bcbf399d65c0df5efb59527",
+							"raw": "localhost:8080/api/posts/{{post_id}}",
 							"host": [
 								"localhost"
 							],
@@ -225,7 +285,7 @@
 							"path": [
 								"api",
 								"posts",
-								"5bcbf399d65c0df5efb59527"
+								"{{post_id}}"
 							]
 						}
 					},
@@ -274,7 +334,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"body\": \"dsfdfdfdfd\",\n\t\"userId\":\"5bcbd5144fb5e9eee9cdc5d9\",\n\t\"postId\": \"5bcbf89796d864f7a7d73c50\"\n}"
+							"raw": "{\n\t\"body\": \"new comment\",\n\t\"userId\": {{user_id}},\n\t\"postId\": {{post_id}}\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/api/comments/",
@@ -305,10 +365,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"userId\":\"5bcbe1353726b5f07bb6b91a\",\n\t\"postId\":\"5bcbe1353726b5f07bb6b91a\",\n\t\"body\": \"1212\"\n}"
+							"raw": "{\n\t\"body\": \"updated new comment\",\n\t\"userId\": {{user_id}},\n\t\"postId\": {{post_id}}\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/api/comments/5bcbf949457b4df7bbfdf124",
+							"raw": "localhost:8080/api/comments/{{comment_id}}",
 							"host": [
 								"localhost"
 							],
@@ -316,7 +376,7 @@
 							"path": [
 								"api",
 								"comments",
-								"5bcbf949457b4df7bbfdf124"
+								"{{comment_id}}"
 							]
 						}
 					},
@@ -332,7 +392,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/comments/5bcbf949457b4df7bbfdf124",
+							"raw": "localhost:8080/api/comments/{{comment_id}}",
 							"host": [
 								"localhost"
 							],
@@ -340,7 +400,7 @@
 							"path": [
 								"api",
 								"comments",
-								"5bcbf949457b4df7bbfdf124"
+								"{{comment_id}}"
 							]
 						}
 					},
