@@ -43,10 +43,10 @@ export const login = async (req, res, next) => {
 export const register = async (req, res, next) => {
   try {
     const user = await db.User.create(req.body);
-    const { id, name, email, profileImageUrl } = user;
+    const { _id, name, email, profileImageUrl } = user;
     const token = jwt.sign(
       {
-        id,
+        _id,
         name,
       },
       process.env.SECRET_KEY,
@@ -55,7 +55,7 @@ export const register = async (req, res, next) => {
       }
     );
     return res.status(200).json({
-      id,
+      _id,
       name,
       email,
       profileImageUrl,

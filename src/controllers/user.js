@@ -16,7 +16,7 @@ export const updateUser = async (req, res, next) => {
       profileImageUrl: req.body.profileImageUrl,
     };
     const foundUser = await db.User.findByIdAndUpdate(
-      req.params.post_id,
+      req.params.user_id,
       updatedUser,
       { new: true }
     );
@@ -28,9 +28,9 @@ export const updateUser = async (req, res, next) => {
 
 export const deleteUser = async (req, res, next) => {
   try {
-    const deletedUser = await db.User.findByIdAndDelete(req.params.post_id);
+    const deletedUser = await db.User.findByIdAndDelete(req.params.user_id);
     return res.status(200).json({
-      id: req.params.post_id,
+      id: req.params.user_id,
     });
   } catch (err) {
     return next(err);

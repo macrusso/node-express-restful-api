@@ -2,20 +2,41 @@ import mongoose from 'mongoose';
 import chaiHttp from 'chai-http';
 import chai from 'chai';
 import app from '../index';
-import { token, testUser } from './auth';
 
 chai.should();
 chai.use(chaiHttp);
 
-let postId;
-
 describe('Post', () => {
+  let testUser = {};
+  let postId = '';
+
+  describe('/POST register user', () => {
+    it('it should POST new user', done => {
+      const newUser = {
+        name: 'new name3',
+        password: 'password',
+        email: 'test_new3@test.com',
+      };
+      chai
+        .request(app)
+        .post('/api/auth/register')
+        .send(newUser)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('token');
+          testUser = res.body;
+          done();
+        });
+    });
+  });
+
   describe('/GET all posts', () => {
     it('it should GET all posts', done => {
       chai
         .request(app)
         .get('/api/posts')
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${testUser.token}`)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -51,7 +72,7 @@ describe('Post', () => {
       chai
         .request(app)
         .post('/api/posts')
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${testUser.token}`)
         .send(newPost)
         .end((err, res) => {
           res.should.have.status(200);
@@ -96,7 +117,7 @@ describe('Post', () => {
       chai
         .request(app)
         .patch(`/api/posts/${postId}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${testUser.token}`)
         .send(updatedPost)
         .end((err, res) => {
           res.should.have.status(200);
@@ -135,7 +156,7 @@ describe('Post', () => {
       chai
         .request(app)
         .del(`/api/posts/${postId}`)
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${testUser.token}`)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');

@@ -2,20 +2,64 @@ import mongoose from 'mongoose';
 import chaiHttp from 'chai-http';
 import chai from 'chai';
 import app from '../index';
-import { token, testUser, testPost } from './auth';
 
 chai.should();
 chai.use(chaiHttp);
 
-let commentId;
-
 describe('Comment', () => {
+  let testUser = {};
+  let testPost = '';
+  let testCommentId = '';
+
+  describe('/POST register user', () => {
+    it('it should POST new user', done => {
+      const newUser = {
+        name: 'new name2',
+        password: 'password',
+        email: 'test_new2@test.com',
+      };
+      chai
+        .request(app)
+        .post('/api/auth/register')
+        .send(newUser)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('token');
+          testUser = res.body;
+          done();
+        });
+    });
+  });
+
+  describe('/POST create post', () => {
+    it('it should POST create post', done => {
+      const newPost = {
+        title: 'test post',
+        body: 'awesome new test post',
+        userId: testUser._id,
+      };
+      chai
+        .request(app)
+        .post('/api/posts')
+        .set('Authorization', `Bearer ${testUser.token}`)
+        .send(newPost)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('title').eql(newPost.title);
+          testPost = res.body;
+          done();
+        });
+    });
+  });
+
   describe('/GET all comments', () => {
     it('it should GET all comments', done => {
       chai
         .request(app)
         .get('/api/comments')
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${testUser.token}`)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -51,13 +95,13 @@ describe('Comment', () => {
       chai
         .request(app)
         .post('/api/comments')
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${testUser.token}`)
         .send(newComment)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.property('body').eql(newComment.body);
-          commentId = res.body._id;
+          testCommentId = res.body._id;
           done();
         });
     });
@@ -95,8 +139,8 @@ describe('Comment', () => {
       };
       chai
         .request(app)
-        .patch(`/api/comments/${commentId}`)
-        .set('Authorization', `Bearer ${token}`)
+        .patch(`/api/comments/${testCommentId}`)
+        .set('Authorization', `Bearer ${testUser.token}`)
         .send(updatedComment)
         .end((err, res) => {
           res.should.have.status(200);
@@ -116,7 +160,7 @@ describe('Comment', () => {
       };
       chai
         .request(app)
-        .patch(`/api/comments/${commentId}`)
+        .patch(`/api/comments/${testCommentId}`)
         .send(updatedComment)
         .end((err, res) => {
           res.should.have.status(401);
@@ -134,12 +178,12 @@ describe('Comment', () => {
     it('it should DEL delete comment', done => {
       chai
         .request(app)
-        .del(`/api/comments/${commentId}`)
-        .set('Authorization', `Bearer ${token}`)
+        .del(`/api/comments/${testCommentId}`)
+        .set('Authorization', `Bearer ${testUser.token}`)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
-          res.body.should.have.property('id').eql(commentId);
+          res.body.should.have.property('id').eql(testCommentId);
           done();
         });
     });
@@ -149,7 +193,7 @@ describe('Comment', () => {
     it('it should fail to DEL delete comment', done => {
       chai
         .request(app)
-        .del(`/api/comments/${commentId}`)
+        .del(`/api/comments/${testCommentId}`)
         .end((err, res) => {
           res.should.have.status(401);
           res.body.should.be.a('object');

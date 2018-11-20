@@ -2,24 +2,9 @@ import mongoose from 'mongoose';
 import chaiHttp from 'chai-http';
 import chai from 'chai';
 import app from '../index';
-import { User, Post } from '../models';
 
 chai.should();
 chai.use(chaiHttp);
-
-export const testUser = new User({
-  name: 'test user',
-  password: 'password',
-  email: 'test_user@test.com',
-}).save();
-
-export const testPost = new Post({
-  title: 'test post',
-  body: 'awesome new test post',
-  userId: testUser._id,
-}).save();
-
-export let token;
 
 describe('Auth', () => {
   describe('/POST register user', () => {
@@ -102,7 +87,6 @@ describe('Auth', () => {
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.property('token');
-          token = res.body.token;
           done();
         });
     });
