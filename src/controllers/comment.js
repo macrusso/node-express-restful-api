@@ -1,4 +1,4 @@
-import * as db from '../models';
+import * as db from "../models";
 
 export const createComment = async (req, res, next) => {
   try {
@@ -7,7 +7,7 @@ export const createComment = async (req, res, next) => {
       userId: req.body.userId,
       postId: req.body.postId,
     });
-    const foundComment = await db.Comment.findById(post._id).populate('user', {
+    const foundComment = await db.Comment.findById(post._id).populate("user", {
       name: true,
       profileImageUrl: true,
     });
@@ -19,7 +19,7 @@ export const createComment = async (req, res, next) => {
 
 export const getComments = async (req, res, next) => {
   try {
-    const comments = await db.Comment.find().sort({ createdAt: 'desc' });
+    const comments = await db.Comment.find().sort({ createdAt: "desc" });
     return res.status(200).json(comments);
   } catch (err) {
     return next(err);
@@ -31,11 +31,7 @@ export const updateComment = async (req, res, next) => {
     const updatedComment = {
       body: req.body.body,
     };
-    const foundComment = await db.Comment.findByIdAndUpdate(
-      req.params.comment_id,
-      updatedComment,
-      { new: true }
-    );
+    const foundComment = await db.Comment.findByIdAndUpdate(req.params.comment_id, updatedComment, { new: true });
     return res.status(200).json(foundComment);
   } catch (err) {
     return next(err);
@@ -44,9 +40,7 @@ export const updateComment = async (req, res, next) => {
 
 export const deleteComment = async (req, res, next) => {
   try {
-    const deletedComment = await db.Comment.findByIdAndDelete(
-      req.params.comment_id
-    );
+    const deletedComment = await db.Comment.findByIdAndDelete(req.params.comment_id);
     return res.status(200).json({
       id: req.params.comment_id,
     });

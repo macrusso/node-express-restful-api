@@ -1,4 +1,4 @@
-import * as db from '../models';
+import * as db from "../models";
 
 export const getUsers = async (req, res, next) => {
   try {
@@ -15,11 +15,7 @@ export const updateUser = async (req, res, next) => {
       name: req.body.name,
       profileImageUrl: req.body.profileImageUrl,
     };
-    const foundUser = await db.User.findByIdAndUpdate(
-      req.params.user_id,
-      updatedUser,
-      { new: true }
-    );
+    const foundUser = await db.User.findByIdAndUpdate(req.params.user_id, updatedUser, { new: true });
     return res.status(200).json(foundUser);
   } catch (err) {
     return next(err);

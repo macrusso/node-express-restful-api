@@ -1,20 +1,15 @@
-import express from 'express';
-import {
-  createComment,
-  getComments,
-  deleteComment,
-  updateComment,
-} from '../controllers/comment';
+import express from "express";
+import { createComment, getComments, deleteComment, updateComment } from "../controllers/comment";
 
 const router = express.Router({ mergeParams: true });
 
 router
-  .route('/')
+  .route("/")
   .get(getComments)
   .post(createComment);
 
 router
-  .route('/:comment_id')
+  .route("/:comment_id")
   .patch(updateComment)
   .delete(deleteComment);
 

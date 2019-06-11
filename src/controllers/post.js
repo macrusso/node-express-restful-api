@@ -1,4 +1,4 @@
-import * as db from '../models';
+import * as db from "../models";
 
 export const createPost = async (req, res, next) => {
   try {
@@ -7,7 +7,7 @@ export const createPost = async (req, res, next) => {
       body: req.body.body,
       userId: req.body.userId,
     });
-    const foundPost = await db.Post.findById(post._id).populate('user', {
+    const foundPost = await db.Post.findById(post._id).populate("user", {
       name: true,
       profileImageUrl: true,
     });
@@ -19,7 +19,7 @@ export const createPost = async (req, res, next) => {
 
 export const getPosts = async (req, res, next) => {
   try {
-    const posts = await db.Post.find().sort({ createdAt: 'desc' });
+    const posts = await db.Post.find().sort({ createdAt: "desc" });
     return res.status(200).json(posts);
   } catch (err) {
     return next(err);
@@ -32,11 +32,7 @@ export const updatePost = async (req, res, next) => {
       title: req.body.title,
       body: req.body.body,
     };
-    const foundPost = await db.Post.findByIdAndUpdate(
-      req.params.post_id,
-      updatedPost,
-      { new: true }
-    );
+    const foundPost = await db.Post.findByIdAndUpdate(req.params.post_id, updatedPost, { new: true });
     return res.status(200).json(foundPost);
   } catch (err) {
     return next(err);
