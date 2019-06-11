@@ -32,7 +32,7 @@ $ npm install
 Get mongo db, with brew:
 
 ```
-$ cd brew install mongodb
+$ brew install mongodb
 ```
 
 To start server, run:

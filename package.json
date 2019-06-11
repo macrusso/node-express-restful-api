@@ -8,7 +8,9 @@
     "prestart": "npm run -s build",
     "start": "NODE_ENV=production PORT=8080 node dist/index.js",
     "dev": "NODE_ENV=development PORT=8080 nodemon -w ./src --exec \"babel-node ./src\"",
-    "test": "NODE_ENV=test PORT=8080 mocha --require babel-register --exit ./src/tests --exec \"babel-node ./src/tests\""
+    "test": "NODE_ENV=test PORT=8080 mocha --require babel-register --exit ./src/tests --exec \"babel-node ./src/tests\"",
+    "lint": "tslint 'src/**/*.{ts,tsx,js,jsx}'",
+    "pretty": "prettier --write 'src/**/*.{ts,tsx,js,jsx}'"
   },
   "keywords": [],
   "author": "Mac Rusek",
