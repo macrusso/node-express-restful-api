@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.com/macrusso/node-express-restful-api.svg?branch=master)](https://travis-ci.com/macrusso/node-express-restful-api)
 
+_Main part of this application was created around July of 2018. It has some outdated patterns and solutions. I decided to reuse it to play with Docker and Kubernetes._
+
 ### Basics
 
 - node
