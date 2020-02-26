@@ -1,4 +1,4 @@
 {
-  "presets": ["env", "es2017"],
-  "plugins": ["transform-async-to-module-method"]
+  "presets": ["@babel/env"],
+  "plugins": ["@babel/plugin-transform-async-to-generator"]
 }
