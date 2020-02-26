@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "test") {
     },
   );
 } else {
-  mongoose.connect("mongodb://localhost:27017/api", {
+  mongoose.connect("mongodb://blog-db:27017/api", {
     keepAlive: true,
     useNewUrlParser: true,
   });
