@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import chaiHttp from "chai-http";
 import chai from "chai";
 import app from "../index";
