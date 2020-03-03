@@ -7,7 +7,7 @@ mongoose.Promise = Promise;
 
 if (process.env.NODE_ENV === "test") {
   mongoose.connect(
-    "mongodb://localhost:27017/test",
+    process.env.MONGO_TEST_URI,
     {
       keepAlive: true,
       useNewUrlParser: true,
@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "test") {
     },
   );
 } else {
-  mongoose.connect("mongodb://blog-db:27017/api", {
+  mongoose.connect(process.env.MONGO_API_URI, {
     keepAlive: true,
     useNewUrlParser: true,
   });
