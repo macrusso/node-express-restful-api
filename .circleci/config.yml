@@ -4,6 +4,8 @@ jobs:
     docker:
       - image: circleci/node:10.16.3
       - image: mongo:4.2.0
+    environment:
+      MONGO_TEST_URI: mongodb://localhost:27017/test
     steps:
       - checkout
       - run: npm install
