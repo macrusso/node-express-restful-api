@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "npx babel src --out-dir dist",
-    "start": "NODE_ENV=production PORT=8080 node dist/index.js",
-    "dev": "NODE_ENV=development PORT=8080 nodemon --exec npx babel-node -- ./src",
-    "test": "NODE_ENV=test PORT=8080 mocha --require babel-register --exit ./src/tests --exec \"babel-node ./src/tests\"",
+    "start": "NODE_ENV=production node dist/index.js",
+    "dev": "NODE_ENV=development nodemon --exec npx babel-node -- ./src",
+    "test": "NODE_ENV=test mocha --require @babel/register --exit ./src/tests --exec \"babel-node ./src/tests\"",
     "lint": "tslint 'src/**/*.{ts,tsx,js,jsx}'",
     "pretty": "prettier --write 'src/**/*.{ts,tsx,js,jsx}'"
   },
@@ -30,6 +30,7 @@
     "@babel/node": "^7.8.4",
     "@babel/plugin-transform-async-to-generator": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
+    "@babel/register": "^7.8.6",
     "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
