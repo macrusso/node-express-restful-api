@@ -22,7 +22,8 @@
     "event-stream": "^3.3.4",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.3.0",
-    "mongoose": "^5.3.4"
+    "mongoose": "^5.3.4",
+    "babel-polyfill": "^6.26.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
