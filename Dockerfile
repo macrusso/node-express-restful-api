@@ -14,7 +14,6 @@ COPY package.json /app/package.json
 RUN apk --no-cache add --virtual builds-deps build-base python
 RUN npm install --only=prod
 
-ENV NODE_ENV production
 EXPOSE 8080
 USER node
 CMD ["node", "index.js"]
